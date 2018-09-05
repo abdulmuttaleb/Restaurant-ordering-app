@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "648832081577",
+    "firebase_url": "https://hosny-ordering.firebaseio.com",
+    "project_id": "hosny-ordering",
+    "storage_bucket": "hosny-ordering.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648832081577:android:a7bf31f3865278d4",
+        "android_client_info": {
+          "package_name": "com.isaiko.hosnyorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648832081577-q7co4vtpvcgpksrkv9d6uiqgle840r6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAneLxwA2EpGUrRx9XuQnPrAWu7rDg5Ig"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

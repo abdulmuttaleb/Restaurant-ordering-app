@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Hosny</string>
+
+
+    <!-- Keys -->
+    <string name="facebook_app_id">461386024368249</string>
+    <string name="fb_login_protocol_scheme">fb461386024368249</string>
+
+</resources>
