@@ -3,9 +3,8 @@ package com.isaiko.hosnyorder.Model;
 import android.net.Uri;
 
 public class User {
-    private String mUserName, mPhoneNumber, mMail,mProfilePicture;
+    private String mUserName, mPhoneNumber, mMail,mProfilePicture,mUserState;
     private Address mUserAddress;
-
     public User() {
     }
 

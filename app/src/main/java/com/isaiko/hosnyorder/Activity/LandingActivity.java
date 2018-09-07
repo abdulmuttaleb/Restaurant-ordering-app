@@ -1,10 +1,18 @@
 package com.isaiko.hosnyorder.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -36,23 +44,52 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class LandingActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     private String fbUserName, fbUserEmail;
     LoginButton loginButton;
-
+    private ProgressDialog mProgressDialog;
     private FirebaseAuth mAuth;
     private DatabaseReference mUsersDatabaseRef;
+
+    @BindView(R.id.til_username)
+    TextInputLayout emailTextInputLayout;
+    @BindView(R.id.til_password)
+    TextInputLayout passwordTextInputLayout;
+    @BindView(R.id.et_username)
+    TextInputEditText emailEditText;
+    @BindView(R.id.et_password)
+    TextInputEditText passwordEditText;
+    @BindView(R.id.iv_facebook_login)
+    ImageView facebookLoginImageView;
+    @BindView(R.id.tv_sign_up)
+    TextView signupTextView;
+    @BindView(R.id.btn_login)
+    Button userLoginButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        ButterKnife.bind(this);
+
         loginButton = findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
         mUsersDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
+
+        facebookLoginImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginButton.performClick();
+            }
+        });
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -70,8 +107,49 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        signupTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(registerIntent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
     }
 
+    @OnClick(R.id.btn_login)
+    public void Login(){
+        if (validateInputFields()) {
+            mAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                mUsersDatabaseRef.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        User retrievedUser = dataSnapshot.getValue(User.class);
+                                        User.setCurrentUser(retrievedUser);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+                                Intent intent = new Intent(LandingActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -100,7 +178,7 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-
+        showProgressDialog();
         final AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -134,7 +212,7 @@ public class LandingActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             LoginManager.getInstance().logOut();
                         }
-
+                        hideProgressDialog();
                     }
                 });
     }
@@ -166,5 +244,40 @@ public class LandingActivity extends AppCompatActivity {
         User newUser = new User(name, email, profilePicUri);
         mUsersDatabaseRef.child(userId).setValue(newUser);
         Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT);
+    }
+
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMessage("Loading");
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    private boolean validateInputFields(){
+        boolean result = true;
+        if(TextUtils.isEmpty(emailEditText.getText())){
+            emailTextInputLayout.setError("Empty username field!");
+            emailTextInputLayout.setErrorEnabled(true);
+            result = false;
+        }else{
+            emailTextInputLayout.setErrorEnabled(false);
+        }
+        if(TextUtils.isEmpty(passwordEditText.getText())){
+            passwordTextInputLayout.setError("Empty password field!");
+            passwordTextInputLayout.setErrorEnabled(true);
+            result = false;
+        }else{
+            passwordTextInputLayout.setErrorEnabled(false);
+        }
+        return result;
     }
 }

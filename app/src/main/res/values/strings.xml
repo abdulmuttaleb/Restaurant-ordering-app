@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Hosny</string>
-
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <!-- Keys -->
     <string name="facebook_app_id">461386024368249</string>
