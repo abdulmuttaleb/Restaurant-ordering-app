@@ -1,18 +1,24 @@
 package com.isaiko.hosnyorder.Activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +31,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.isaiko.hosnyorder.Fragments.CartFragment;
+import com.isaiko.hosnyorder.Fragments.ContactUsFragment;
+import com.isaiko.hosnyorder.Fragments.HomeFragment;
+import com.isaiko.hosnyorder.Fragments.PastOrdersFragment;
+import com.isaiko.hosnyorder.Fragments.ProfileFragment;
+import com.isaiko.hosnyorder.Fragments.PromotionsFragment;
+import com.isaiko.hosnyorder.Fragments.SettingsFragment;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.CircleTransform;
@@ -35,14 +48,14 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    @BindView(R.id.textView1)
-    TextView dummyTextView;
     private ProgressDialog mProgressDialog;
 
     @BindView(R.id.drawer_main)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nv_main)
     NavigationView mNavigationView;
+    @BindView(R.id.frame_main)
+    FrameLayout mainFrame;
     View navigationDrawerHeader;
     TextView headerUsernameTextView, headerMailTextView;
     ImageView headerProfileImageView;
@@ -52,11 +65,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference mUsersDatabaseRef;
     FirebaseAuth mAuth;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
@@ -72,8 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User retrievedUser = dataSnapshot.getValue(User.class);
                         User.setCurrentUser(retrievedUser);
-                        dummyTextView.setText(User.getInstance().getmUserName());
                         initNavigationDrawer();
+                        if(savedInstanceState == null){
+                            getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new HomeFragment()).commit();
+                        }
                     }
 
                     @Override
@@ -101,20 +115,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.main_activity_menu, menu);
-       return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){
             return true;
-        }
-        switch(item.getItemId()){
-            case R.id.action_logout:
-                return true;
         }
         return false;
     }
@@ -123,20 +129,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_home:
-                //TODO transition to home fragment
-                mDrawerLayout.closeDrawer(GravityCompat.START);
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new HomeFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Home clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
                 return true;
             case R.id.action_promotions:
-                //TODO transition to promotions fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new PromotionsFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Promotions clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
                 return true;
             case R.id.action_cart:
-                //TODO transition to cart fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new CartFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Cart clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
                 return true;
             case R.id.action_past_orders:
-                //TODO transition to past orders fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new PastOrdersFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Past Orders clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
                 return true;
             case R.id.action_contact_us:
-                //TODO transition to contact us fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new ContactUsFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Contact Us clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
+                return true;
+            case R.id.action_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new SettingsFragment()).addToBackStack(null).commit();
+                Snackbar.make(mDrawerLayout,"Settings clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
                 return true;
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
@@ -153,28 +173,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            FragmentManager fm = getFragmentManager();
+            if (fm.getBackStackEntryCount() > 0) {
+                fm.popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
     private void initNavigationDrawer(){
-        navigationDrawerHeader = mNavigationView.getHeaderView(0);
+        navigationDrawerHeader = mNavigationView.findViewById(R.id.nv_header);
         headerUsernameTextView = navigationDrawerHeader.findViewById(R.id.tv_username);
         headerMailTextView = navigationDrawerHeader.findViewById(R.id.tv_email);
         headerProfileImageView = navigationDrawerHeader.findViewById(R.id.iv_profile_picture);
 
         headerUsernameTextView.setText(User.getInstance().getmUserName());
         headerMailTextView.setText(User.getInstance().getmMail());
-        if(User.getInstance().getmProfilePicture()!=null) {
+        Log.d("Nav Init","Profile Pic: "+User.getInstance().getmProfilePicture());
+        if(User.getInstance().getmProfilePicture()!=null && !User.getInstance().getmProfilePicture().equals("")) {
             Picasso.with(getApplicationContext()).load(User.getInstance().getmProfilePicture())
-                    .transform(new CircleTransform()).placeholder(R.drawable.ic_account_circle_black_24dp)
+                    .transform(new CircleTransform()).placeholder(R.drawable.ic_avatar_placeholder)
                     .into(headerProfileImageView);
         }
 
         headerProfileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO transition to profile fragment
+                Snackbar.make(mDrawerLayout,"Profile clicked",Snackbar.LENGTH_SHORT).show();
+                closeDrawer();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new ProfileFragment()).addToBackStack(null).commit();
             }
         });
     }
@@ -193,4 +221,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mProgressDialog.dismiss();
         }
     }
+
+    public void closeDrawer(){
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+
 }
