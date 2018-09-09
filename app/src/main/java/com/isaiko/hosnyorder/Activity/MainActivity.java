@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -225,5 +226,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void closeDrawer(){
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
+
 
 }
