@@ -60,9 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View navigationDrawerHeader;
     TextView headerUsernameTextView, headerMailTextView;
     ImageView headerProfileImageView;
-
+    ImageView headerCartImageView;
     private ActionBarDrawerToggle mToggle;
-
     DatabaseReference mUsersDatabaseRef;
     FirebaseAuth mAuth;
     @Override
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void openLandingActivity(){
         Intent landingIntent = new Intent(this, LandingActivity.class);
-
         landingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         landingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         landingIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -137,11 +135,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_promotions:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new PromotionsFragment()).addToBackStack(null).commit();
                 Snackbar.make(mDrawerLayout,"Promotions clicked",Snackbar.LENGTH_SHORT).show();
-                closeDrawer();
-                return true;
-            case R.id.action_cart:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new CartFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Cart clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_past_orders:
@@ -188,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         headerUsernameTextView = navigationDrawerHeader.findViewById(R.id.tv_username);
         headerMailTextView = navigationDrawerHeader.findViewById(R.id.tv_email);
         headerProfileImageView = navigationDrawerHeader.findViewById(R.id.iv_profile_picture);
-
+        headerCartImageView = navigationDrawerHeader.findViewById(R.id.iv_cart);
         headerUsernameTextView.setText(User.getInstance().getmUserName());
         headerMailTextView.setText(User.getInstance().getmMail());
         Log.d("Nav Init","Profile Pic: "+User.getInstance().getmProfilePicture());
@@ -204,6 +197,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Snackbar.make(mDrawerLayout,"Profile clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new ProfileFragment()).addToBackStack(null).commit();
+            }
+        });
+
+        headerCartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeDrawer();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new CartFragment()).addToBackStack(null).commit();
             }
         });
     }

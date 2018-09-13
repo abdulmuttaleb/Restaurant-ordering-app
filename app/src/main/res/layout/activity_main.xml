@@ -6,7 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_main">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/food_bg"
+        android:scaleType="centerCrop"
+        android:alpha="0.6"
+        />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_shape"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

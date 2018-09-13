@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#FF9A00</color>
     <color name="colorAccent">#9D10FF</color>
     <color name="errorColor">#cc0000</color>
-    <color name="foodCategory">#FF9A00</color>
-    <color name="hotDrinksCategory">#cc0030</color>
+    <color name="alphaYellow">#33FFB025</color>
+    <color name="colorWhite">#FFFFFFFF</color>
 </resources>

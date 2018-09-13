@@ -1,6 +1,8 @@
 package com.isaiko.hosnyorder.Adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.isaiko.hosnyorder.Model.UI.CategoryUI;
+import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
+import com.isaiko.hosnyorder.Utils.CircleTransform;
 import com.isaiko.hosnyorder.Viewer.CategoryItemViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,8 +31,11 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
     @Override
     public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, int position) {
         final CategoryUI category = categoriesList.get(position);
-        holder.categoryColorCircle.setColorFilter(context.getResources().getColor(category.getIconTint()));
-        holder.categoryImage.setImageResource(category.getIconResourceId());
+        holder.categoryColorCircle.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(category.getIconTint())));
+        //holder.categoryImage.setImageResource(category.getIconResourceId());
+        Picasso.with(context).load(category.getIconResourceId())
+                .transform(new CircleTransform()).placeholder(R.drawable.ic_avatar_placeholder)
+                .into(holder.categoryImage);
         holder.categoryTextView.setText(category.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

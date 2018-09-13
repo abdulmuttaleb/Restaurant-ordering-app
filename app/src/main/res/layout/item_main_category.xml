@@ -1,36 +1,39 @@
-<LinearLayout android:layout_width="70dp"
+<LinearLayout
+    android:layout_width="116dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="16dp">
+
     <RelativeLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="8dp"
-        >
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal">
+
         <ImageView
             android:id="@+id/iv_category_circle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/circle"
-            android:tint="@color/com_facebook_blue"
-            />
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/com_facebook_blue"
+            android:elevation="5dp" />
+
         <ImageView
             android:id="@+id/iv_category_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_food_black_24dp"
-            android:tint="@android:color/white"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_margin="5dp"
-            />
+            android:elevation="5dp"
+            android:src="@drawable/ic_food_black_24dp" />
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_category_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pizza"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:gravity="center"/>
 </LinearLayout>

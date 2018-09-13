@@ -7,4 +7,12 @@
     <string name="facebook_app_id">461386024368249</string>
     <string name="fb_login_protocol_scheme">fb461386024368249</string>
 
+    <string-array name="array_languages">
+        <item>English</item>
+        <item>عربي</item>
+    </string-array>
+    <string-array name="checkout_order_type">
+        <item> Delivery </item>
+        <item>Pick up</item>
+    </string-array>
 </resources>
