@@ -43,12 +43,12 @@ public class HomeFragment extends Fragment {
 
     private void populateCategoryView(){
         categoryList = new ArrayList<>();
-        CategoryUI grillsCategory = new CategoryUI("Grills",R.drawable.grilled, R.color.colorWhite);
-        CategoryUI ma7shyCategory = new CategoryUI("Ma7shy",R.drawable.ma7shy, R.color.colorWhite);
-        CategoryUI poultryCategory = new CategoryUI("Poultry",R.drawable.grilled_poultry, R.color.colorWhite);
-        CategoryUI soupsCategory = new CategoryUI("Soups",R.drawable.soup, R.color.colorWhite);
-        CategoryUI chefDishesCategory = new CategoryUI("Chef's Dishes",R.drawable.chef_dishes, R.color.colorWhite);
-        CategoryUI pastriesCategory = new CategoryUI("Pastries",R.drawable.pastries, R.color.colorWhite);
+        CategoryUI grillsCategory = new CategoryUI(getResources().getString(R.string.home_category_grills),R.drawable.grilled, R.color.colorWhite);
+        CategoryUI ma7shyCategory = new CategoryUI(getResources().getString(R.string.home_category_ma7ashy),R.drawable.ma7shy, R.color.colorWhite);
+        CategoryUI poultryCategory = new CategoryUI(getResources().getString(R.string.home_category_poultry),R.drawable.grilled_poultry, R.color.colorWhite);
+        CategoryUI soupsCategory = new CategoryUI(getResources().getString(R.string.home_category_soups),R.drawable.soup, R.color.colorWhite);
+        CategoryUI chefDishesCategory = new CategoryUI(getResources().getString(R.string.home_category_chef_dishes),R.drawable.chef_dishes, R.color.colorWhite);
+        CategoryUI pastriesCategory = new CategoryUI(getResources().getString(R.string.home_category_pastries),R.drawable.pastries, R.color.colorWhite);
         categoryList.add(grillsCategory);
         categoryList.add(ma7shyCategory);
         categoryList.add(poultryCategory);

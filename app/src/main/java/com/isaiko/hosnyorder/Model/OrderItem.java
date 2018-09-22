@@ -1,42 +1,16 @@
 package com.isaiko.hosnyorder.Model;
 
 public class OrderItem {
-    private String mOrderItemName, mOrderItemCategory;
-    private float mOrderItemPrice;
-    private int mOrderItemQuantity;
 
+    private int mOrderItemQuantity;
+    private Item mOrderItem;
     public OrderItem() {
     }
 
-    public OrderItem(String mOrderItemName, String mOrderItemCategory, float mOrderItemPrice, int mOrderItemQuantity) {
-        this.mOrderItemName = mOrderItemName;
-        this.mOrderItemCategory = mOrderItemCategory;
-        this.mOrderItemPrice = mOrderItemPrice;
+    public OrderItem(Item mOrderItem,int mOrderItemQuantity) {
+
         this.mOrderItemQuantity = mOrderItemQuantity;
-    }
-
-    public String getmOrderItemName() {
-        return mOrderItemName;
-    }
-
-    public void setmOrderItemName(String mOrderItemName) {
-        this.mOrderItemName = mOrderItemName;
-    }
-
-    public String getmOrderItemCategory() {
-        return mOrderItemCategory;
-    }
-
-    public void setmOrderItemCategory(String mOrderItemCategory) {
-        this.mOrderItemCategory = mOrderItemCategory;
-    }
-
-    public float getmOrderItemPrice() {
-        return mOrderItemPrice;
-    }
-
-    public void setmOrderItemPrice(float mOrderItemPrice) {
-        this.mOrderItemPrice = mOrderItemPrice;
+        this.mOrderItem = mOrderItem;
     }
 
     public int getmOrderItemQuantity() {
@@ -45,5 +19,13 @@ public class OrderItem {
 
     public void setmOrderItemQuantity(int mOrderItemQuantity) {
         this.mOrderItemQuantity = mOrderItemQuantity;
+    }
+
+    public Item getmOrderItem() {
+        return mOrderItem;
+    }
+
+    public void setmOrderItem(Item mOrderItem) {
+        this.mOrderItem = mOrderItem;
     }
 }

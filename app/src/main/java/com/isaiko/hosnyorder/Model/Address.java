@@ -1,8 +1,7 @@
 package com.isaiko.hosnyorder.Model;
 
 public class Address {
-    private String mCity, mArea, mAddressNote;
-    private int mBuilding, mFloor, mApartmentNumber;
+    private String mCity, mArea, mAddressNote, mBuilding, mFloor, mApartmentNumber;
 
     public Address() {
     }
@@ -31,27 +30,35 @@ public class Address {
         this.mAddressNote = mAddressNote;
     }
 
-    public int getmBuilding() {
+    public String getmBuilding() {
         return mBuilding;
     }
 
-    public void setmBuilding(int mBuilding) {
+    public void setmBuilding(String mBuilding) {
         this.mBuilding = mBuilding;
     }
 
-    public int getmFloor() {
+    public String getmFloor() {
         return mFloor;
     }
 
-    public void setmFloor(int mFloor) {
+    public void setmFloor(String mFloor) {
         this.mFloor = mFloor;
     }
 
-    public int getmApartmentNumber() {
+    public String getmApartmentNumber() {
         return mApartmentNumber;
     }
 
-    public void setmApartmentNumber(int mApartmentNumber) {
+    public void setmApartmentNumber(String mApartmentNumber) {
         this.mApartmentNumber = mApartmentNumber;
+    }
+
+
+    public String addressToString() {
+        return  mArea +
+                ",Building: " + mBuilding+
+                ",Floor: " + mFloor+
+                ",Unit: " + mApartmentNumber;
     }
 }

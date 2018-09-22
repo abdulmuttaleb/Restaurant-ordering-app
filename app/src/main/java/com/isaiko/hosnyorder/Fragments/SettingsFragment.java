@@ -1,6 +1,7 @@
 package com.isaiko.hosnyorder.Fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +9,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.isaiko.hosnyorder.Activity.MainActivity;
+import com.isaiko.hosnyorder.Activity.ProfileSettingsActivity;
 import com.isaiko.hosnyorder.R;
+import com.isaiko.hosnyorder.Utils.LocaleHelper;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +46,8 @@ public class SettingsFragment extends Fragment {
         profileSettingsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(view, "Profile Settings", Snackbar.LENGTH_SHORT).show();
+                Intent profileSettingsIntent = new Intent(getContext(), ProfileSettingsActivity.class);
+                getContext().startActivity(profileSettingsIntent);
             }
         });
 
@@ -45,29 +55,33 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Choose Language")
-                        .setSingleChoiceItems(R.array.array_languages, -1, new DialogInterface.OnClickListener() {
+                builder.setTitle(getResources().getString(R.string.label_choose_language))
+                        .setSingleChoiceItems(R.array.array_languages, Locale.getDefault().getLanguage().equals("en")?0:1, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
                         })
-                        .setPositiveButton("Change", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.label_change), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ListView lw = ((AlertDialog)dialog).getListView();
                                 int position = lw.getCheckedItemPosition();
                                 if(position == 0){
-                                    Snackbar.make(view,"Change to English",Snackbar.LENGTH_SHORT).show();
+                                    if (!Locale.getDefault().getLanguage().equals("en"))
+                                        updateViews("en");
                                 }else if(position == 1){
-                                    Snackbar.make(view,"Change to Arabic",Snackbar.LENGTH_SHORT).show();
+                                    if (!Locale.getDefault().getLanguage().equals("ar"))
+                                        updateViews("ar");
                                 }
                             }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        }).setNegativeButton(getResources().getString(R.string.label_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
-                }).create().show();
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
@@ -85,5 +99,13 @@ public class SettingsFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void updateViews(String languageCode) {
+        LocaleHelper.setLocale(getContext(), languageCode);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

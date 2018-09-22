@@ -154,7 +154,7 @@ public class SignUpActivity extends AppCompatActivity{
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading");
+            mProgressDialog.setMessage(getResources().getString(R.string.label_loading));
         }
 
         mProgressDialog.show();

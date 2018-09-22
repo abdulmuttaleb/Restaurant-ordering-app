@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="Store">
+        android:title="@string/label_store">
         <menu>
             <group
                 android:id="@+id/main_group"
@@ -10,22 +10,22 @@
                 >
                 <item
                     android:id="@+id/action_home"
-                    android:title="Home"
+                    android:title="@string/label_home"
                     android:icon="@drawable/ic_home_black_24dp"/>
                 <item
                     android:id="@+id/action_promotions"
-                    android:title="Promotions"
+                    android:title="@string/label_promotions"
                     android:icon="@drawable/ic_horn"/>
                 <item
                     android:id="@+id/action_past_orders"
-                    android:title="Past Orders"
+                    android:title="@string/label_past_orders"
                     android:icon="@drawable/ic_history_black_24dp"/>
             </group>
         </menu>
     </item>
 
     <item
-        android:title="Others">
+        android:title="@string/label_others">
         <menu>
             <group
                 android:id="@+id/group_utils"
@@ -33,15 +33,15 @@
                 >
                 <item
                     android:id="@+id/action_settings"
-                    android:title="Settings"
+                    android:title="@string/label_settings"
                     android:icon="@drawable/ic_settings_black_24dp"/>
                 <item
                     android:id="@+id/action_contact_us"
-                    android:title="Contact Us"
+                    android:title="@string/label_contact_us"
                     android:icon="@drawable/ic_perm_phone_msg_black_24dp"/>
                 <item
                     android:id="@+id/action_logout"
-                    android:title="Logout"
+                    android:title="@string/label_logout"
                     android:icon="@drawable/ic_exit_to_app_black_24dp"/>
             </group>
         </menu>

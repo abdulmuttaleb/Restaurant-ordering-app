@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="16dp">
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="24dp">
 
     <RelativeLayout
         android:layout_width="100dp"
@@ -34,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pizza"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:gravity="center"/>
 </LinearLayout>

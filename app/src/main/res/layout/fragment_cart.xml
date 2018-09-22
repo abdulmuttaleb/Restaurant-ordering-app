@@ -26,7 +26,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Order Type"
+                android:text="@string/label_order_type"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -56,7 +56,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Order Time"
+                android:text="@string/label_order_time"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -67,7 +67,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="3"
                 android:gravity="center"
-                android:text="TIME"
+                android:text="@string/label_time"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -79,7 +79,7 @@
             android:layout_gravity="end"
             android:layout_margin="4dp"
             android:background="@android:color/holo_red_light"
-            android:text="Clear Cart"
+            android:text="@string/label_clear_cart"
             android:textStyle="bold"
             android:textColor="@android:color/white"/>
     </LinearLayout>
@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:text="Total: --- EGP"
+            android:text="@string/label_total"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/holo_orange_light"
-                android:text="CHECK OUT"
+                android:text="@string/label_check_out"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"/>
         </LinearLayout>

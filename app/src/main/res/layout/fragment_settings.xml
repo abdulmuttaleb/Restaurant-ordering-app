@@ -10,7 +10,7 @@
         android:id="@+id/tv_main_settings_label"
         android:layout_width="0dp"
         android:layout_height="34dp"
-        android:text="Main Settings"
+        android:text="@string/label_main_settings"
         android:padding="8dp"
         android:elevation="2dp"
         android:background="@color/colorPrimary"
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center_vertical"
-            android:text="My Profile Settings"
+            android:text="@string/label_profile_settings"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="match_parent"
-            android:text="Language"
+            android:text="@string/label_language"
             android:gravity="center_vertical"
             android:textSize="16sp"
             />
@@ -97,7 +97,7 @@
         android:id="@+id/tv_support_label"
         android:layout_width="0dp"
         android:layout_height="34dp"
-        android:text="Support"
+        android:text="@string/label_support"
         android:padding="8dp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
@@ -136,7 +136,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center_vertical"
-            android:text="Report a Problem"
+            android:text="@string/label_report_problem"
             android:textSize="16sp" />
     </LinearLayout>
     <View
@@ -172,8 +172,8 @@
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="match_parent"
-            android:text="Privacy Policy"
-            android:gravity="center_vertical"
+            android:text="@string/label_privacy_policy"
+            android:gravity="center_vertical|start"
             android:textSize="16sp"
             />
     </LinearLayout>

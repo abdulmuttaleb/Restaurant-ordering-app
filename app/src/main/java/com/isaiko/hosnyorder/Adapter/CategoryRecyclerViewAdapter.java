@@ -35,6 +35,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
         //holder.categoryImage.setImageResource(category.getIconResourceId());
         Picasso.with(context).load(category.getIconResourceId())
                 .transform(new CircleTransform()).placeholder(R.drawable.ic_avatar_placeholder)
+                .resize(64,64)
                 .into(holder.categoryImage);
         holder.categoryTextView.setText(category.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

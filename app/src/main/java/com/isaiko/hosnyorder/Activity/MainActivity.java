@@ -3,6 +3,7 @@ package com.isaiko.hosnyorder.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ import com.isaiko.hosnyorder.Fragments.SettingsFragment;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.CircleTransform;
+import com.isaiko.hosnyorder.Utils.LocaleHelper;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         mNavigationView.setNavigationItemSelectedListener(this);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -129,27 +132,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.action_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new HomeFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Home clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_promotions:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new PromotionsFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Promotions clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_past_orders:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new PastOrdersFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Past Orders clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new ContactUsFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Contact Us clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new SettingsFragment()).addToBackStack(null).commit();
-                Snackbar.make(mDrawerLayout,"Settings clicked",Snackbar.LENGTH_SHORT).show();
                 closeDrawer();
                 return true;
             case R.id.action_logout:
@@ -184,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         headerCartImageView = navigationDrawerHeader.findViewById(R.id.iv_cart);
         headerUsernameTextView.setText(User.getInstance().getmUserName());
         headerMailTextView.setText(User.getInstance().getmMail());
-        Log.d("Nav Init","Profile Pic: "+User.getInstance().getmProfilePicture());
         if(User.getInstance().getmProfilePicture()!=null && !User.getInstance().getmProfilePicture().equals("")) {
             Picasso.with(getApplicationContext()).load(User.getInstance().getmProfilePicture())
                     .transform(new CircleTransform()).placeholder(R.drawable.ic_avatar_placeholder)
@@ -212,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading");
+            mProgressDialog.setMessage(getResources().getString(R.string.label_loading));
         }
 
         mProgressDialog.show();
@@ -228,5 +225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 }
