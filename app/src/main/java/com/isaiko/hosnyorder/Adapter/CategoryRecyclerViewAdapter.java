@@ -1,6 +1,7 @@
 package com.isaiko.hosnyorder.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.isaiko.hosnyorder.Activity.MenuActivity;
 import com.isaiko.hosnyorder.Model.UI.CategoryUI;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
@@ -41,7 +43,10 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, category.getName()+" was chosen!", Toast.LENGTH_SHORT).show();
+                Intent menuIntent = new Intent(context, MenuActivity.class);
+                menuIntent.putExtra("category",category.getName());
+                menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(menuIntent);
             }
         });
     }

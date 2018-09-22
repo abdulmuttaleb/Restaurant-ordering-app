@@ -1,40 +1,58 @@
 package com.isaiko.hosnyorder.Model;
 
 public class Item {
-    private String mOrderItemName, mOrderItemCategory;
-    private float mOrderItemPrice;
-
+    private String mItemName, mItemCategory;
+    private float mItemPrice;
+    private String mItemKey;
+    private String mItemImageUri;
     public Item() {
     }
 
-    public Item(String mOrderItemName, String mOrderItemCategory, float mOrderItemPrice) {
-        this.mOrderItemName = mOrderItemName;
-        this.mOrderItemCategory = mOrderItemCategory;
-        this.mOrderItemPrice = mOrderItemPrice;
+    public Item(String mItemName, String mItemCategory, float mItemPrice, String mItemImageUri) {
+        this.mItemName = mItemName;
+        this.mItemCategory = mItemCategory;
+        this.mItemPrice = mItemPrice;
+        this.mItemImageUri = mItemImageUri;
     }
 
 
-    public String getmOrderItemName() {
-        return mOrderItemName;
+    public String getmItemName() {
+        return mItemName;
     }
 
-    public void setmOrderItemName(String mOrderItemName) {
-        this.mOrderItemName = mOrderItemName;
+    public void setmItemName(String mItemName) {
+        this.mItemName = mItemName;
     }
 
-    public String getmOrderItemCategory() {
-        return mOrderItemCategory;
+    public String getmItemCategory() {
+        return mItemCategory;
     }
 
-    public void setmOrderItemCategory(String mOrderItemCategory) {
-        this.mOrderItemCategory = mOrderItemCategory;
+    public void setmItemCategory(String mItemCategory) {
+        this.mItemCategory = mItemCategory;
     }
 
-    public float getmOrderItemPrice() {
-        return mOrderItemPrice;
+    public float getmItemPrice() {
+        return mItemPrice;
     }
 
-    public void setmOrderItemPrice(float mOrderItemPrice) {
-        this.mOrderItemPrice = mOrderItemPrice;
+    public void setmItemPrice(float mItemPrice) {
+        this.mItemPrice = mItemPrice;
+    }
+
+    public String getmItemKey() {
+        return mItemKey;
+    }
+
+    public void setmItemKey(String mItemKey) {
+        this.mItemKey = mItemKey;
+    }
+
+    public String getmItemImageUri() {
+        return mItemImageUri;
+    }
+
+    public void setmItemImageUri(String mItemImageUri) {
+        this.mItemImageUri = mItemImageUri;
     }
 }

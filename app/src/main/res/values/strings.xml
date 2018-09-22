@@ -60,6 +60,7 @@
     <string name="label_confirm">Confirm</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_change">Change</string>
+    <string name="prompt_select_category">Select Category</string>
     <!-- Keys -->
     <string name="facebook_app_id">461386024368249</string>
     <string name="fb_login_protocol_scheme">fb461386024368249</string>
@@ -74,12 +75,13 @@
     </string-array>
 
     <string-array name="filter_categories">
+        <item>Select a category..</item>
         <item>All</item>
         <item>Grills</item>
         <item>Ma7ashy</item>
         <item>Poultry</item>
         <item>Soups</item>
-        <item>Chef&#39;s Dishes</item>
+        <item>Chef\'s Dishes</item>
         <item>Pastries</item>
     </string-array>
 </resources>
