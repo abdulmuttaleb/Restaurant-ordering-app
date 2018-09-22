@@ -3,7 +3,7 @@ package com.isaiko.hosnyorder.Model;
 import android.net.Uri;
 
 public class User {
-    private String mUserName, mPhoneNumber, mMail,mProfilePicture,mUserState;
+    private String mUserName, mPhoneNumber, mMail,mProfilePicture,userSelectedBranch,mUserState;
     private Address mUserAddress;
     public User() {
     }
@@ -65,5 +65,13 @@ public class User {
 
     public void setmProfilePicture(String mProfilePicture) {
         this.mProfilePicture = mProfilePicture;
+    }
+
+    public String getUserSelectedBranch() {
+        return userSelectedBranch;
+    }
+
+    public void setUserSelectedBranch(String userSelectedBranch) {
+        this.userSelectedBranch = userSelectedBranch;
     }
 }

@@ -61,6 +61,15 @@
     <string name="label_cancel">Cancel</string>
     <string name="label_change">Change</string>
     <string name="prompt_select_category">Select Category</string>
+    <!--Branches-->
+    <string-array name="branches">
+        <item>Bahary</item>
+        <item>Mandara</item>
+        <item>Downtown</item>
+        <item>Moqattam</item>
+        <item>Masr El Gedida</item>
+        <item>Madinet El Nasr</item>
+    </string-array>
     <!-- Keys -->
     <string name="facebook_app_id">461386024368249</string>
     <string name="fb_login_protocol_scheme">fb461386024368249</string>

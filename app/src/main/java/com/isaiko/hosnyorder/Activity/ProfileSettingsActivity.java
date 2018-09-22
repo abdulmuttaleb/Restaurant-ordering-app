@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
+
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -55,6 +59,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     TextView floorTextView;
     @BindView(R.id.tv_apart_number)
     TextView apartmentTextView;
+    @BindView(R.id.tv_branch)
+    TextView branchTextView;
     DatabaseReference userDatabaseRef;
 
 
@@ -109,6 +115,34 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
 
+        branchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ProfileSettingsActivity.this);
+                builder.setTitle("Choose Branch")
+                        .setSingleChoiceItems(R.array.branches,-1, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setPositiveButton(getResources().getString(R.string.label_change), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ListView lw = ((android.app.AlertDialog)dialog).getListView();
+                                int position = lw.getCheckedItemPosition();
+                                String selectedBranch = lw.getItemAtPosition(position).toString();
+                                userDatabaseRef.child("userSelectedBranch").setValue(selectedBranch);
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.label_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                android.app.AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
        userDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,6 +167,9 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             buildingTextView.setText(String.valueOf(currentUser.getmUserAddress().getmBuilding()));
             floorTextView.setText(String.valueOf(currentUser.getmUserAddress().getmFloor()));
             apartmentTextView.setText(String.valueOf(currentUser.getmUserAddress().getmApartmentNumber()));
+        }
+        if(currentUser.getUserSelectedBranch()!=null){
+            branchTextView.setText(currentUser.getUserSelectedBranch());
         }
     }
     private void showChangeDialog(String title, final DatabaseReference ref, final boolean number){
