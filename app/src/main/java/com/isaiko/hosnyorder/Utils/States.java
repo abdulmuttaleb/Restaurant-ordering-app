@@ -10,6 +10,7 @@ public class States {
     public static final String ORDER_HOLD = "HOLD";
     public static final String ORDER_SHIPPED = "SHIPPED";
     public static final String ORDER_DELIVERED = "DELIVERED";
+    public static final String ORDER_OPENED = "OPENED";
     public static final String ORDER_CLOSED = "CLOSED";
 
 }

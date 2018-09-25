@@ -40,6 +40,7 @@ import com.isaiko.hosnyorder.Fragments.PastOrdersFragment;
 import com.isaiko.hosnyorder.Fragments.ProfileFragment;
 import com.isaiko.hosnyorder.Fragments.PromotionsFragment;
 import com.isaiko.hosnyorder.Fragments.SettingsFragment;
+import com.isaiko.hosnyorder.Model.Cart;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.CircleTransform;
@@ -60,11 +61,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.frame_main)
     FrameLayout mainFrame;
     View navigationDrawerHeader;
-    TextView headerUsernameTextView, headerMailTextView;
+    public static TextView headerUsernameTextView, headerMailTextView,headerCartNotification;
     ImageView headerProfileImageView;
     ImageView headerCartImageView;
     private ActionBarDrawerToggle mToggle;
     DatabaseReference mUsersDatabaseRef;
+    DatabaseReference mCartDatabaseRef;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -80,13 +82,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             if(user.isEmailVerified()) {
-                mUsersDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
                 mAuth = FirebaseAuth.getInstance();
+                mUsersDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                mCartDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Cart").child(mAuth.getUid());
                 mUsersDatabaseRef.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User retrievedUser = dataSnapshot.getValue(User.class);
                         User.setCurrentUser(retrievedUser);
+                        mCartDatabaseRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    Cart retrievedCart = dataSnapshot.getValue(Cart.class);
+                                    Cart.setCurrentCart(retrievedCart);
+                                    if(Cart.getInstance().getmItems().size()>0) {
+                                        headerCartNotification.setVisibility(View.VISIBLE);
+                                        headerCartNotification.setText(String.valueOf(Cart.getInstance().getmItems().size()));
+                                    }
+                                }else{
+                                    headerCartNotification.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
                         initNavigationDrawer();
                         if(savedInstanceState == null){
                             getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new HomeFragment()).commit();
@@ -180,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         headerMailTextView = navigationDrawerHeader.findViewById(R.id.tv_email);
         headerProfileImageView = navigationDrawerHeader.findViewById(R.id.iv_profile_picture);
         headerCartImageView = navigationDrawerHeader.findViewById(R.id.iv_cart);
+        headerCartNotification = navigationDrawerHeader.findViewById(R.id.tv_cart_notification);
+        headerCartNotification.setVisibility(View.GONE);
         headerUsernameTextView.setText(User.getInstance().getmUserName());
         headerMailTextView.setText(User.getInstance().getmMail());
         if(User.getInstance().getmProfilePicture()!=null && !User.getInstance().getmProfilePicture().equals("")) {
@@ -204,6 +228,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new CartFragment()).addToBackStack(null).commit();
             }
         });
+
+        if(Cart.getInstance()!=null){
+            if(Cart.getInstance().getmItems().size()>0) {
+                headerCartNotification.setVisibility(View.VISIBLE);
+                headerCartNotification.setText(String.valueOf(Cart.getInstance().getmItems().size()));
+            }
+        }
     }
     public void showProgressDialog() {
         if (mProgressDialog == null) {

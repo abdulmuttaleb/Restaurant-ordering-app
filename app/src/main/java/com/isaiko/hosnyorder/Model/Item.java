@@ -1,6 +1,8 @@
 package com.isaiko.hosnyorder.Model;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String mItemName, mItemCategory;
     private float mItemPrice;
     private String mItemKey;

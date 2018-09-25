@@ -70,6 +70,13 @@
         <item>Masr El Gedida</item>
         <item>Madinet El Nasr</item>
     </string-array>
+    <!--Weights-->
+    <string-array name="order_weights">
+        <item>&#8531; Kg</item>
+        <item>&#189; Kg</item>
+        <item>&#190; Kg</item>
+        <item>1 Kg</item>
+    </string-array>
     <!-- Keys -->
     <string name="facebook_app_id">461386024368249</string>
     <string name="fb_login_protocol_scheme">fb461386024368249</string>

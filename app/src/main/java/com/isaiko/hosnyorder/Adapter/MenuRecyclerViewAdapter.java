@@ -1,7 +1,9 @@
 package com.isaiko.hosnyorder.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import com.isaiko.hosnyorder.Activity.MenuActivity;
+import com.isaiko.hosnyorder.Fragments.dialog.AddToCartDialog;
 import com.isaiko.hosnyorder.Model.Item;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Viewer.MenuItemViewHolder;
@@ -36,7 +40,11 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemViewHo
         holder.itemAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO add add_to_card functionality
+                AddToCartDialog dialog = new AddToCartDialog();
+                Bundle args = new Bundle();
+                args.putSerializable("passedItem",item);
+                dialog.setArguments(args);
+                dialog.show(((MenuActivity)context).getSupportFragmentManager(),"Add to cart dialog");
             }
         });
         Picasso.with(context).load(item.getmItemImageUri())

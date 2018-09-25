@@ -102,8 +102,8 @@ public class MenuActivity extends AppCompatActivity {
         if(!passedFilter.isEmpty() && passedFilter!=null){
             int position = categoriesAdapter.getPosition(passedFilter);
             categoriesSpinner.setSelection(position);
+            menuItemRecyclerViewAdapter.getFilter().filter(passedFilter);
         }
-        //menuItemRecyclerViewAdapter.getFilter().filter(passedFilter);
     }
 
     private void fetchMenuItems(){
