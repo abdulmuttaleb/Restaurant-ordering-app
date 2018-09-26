@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.isaiko.hosnyorder.Adapter.MenuRecyclerViewAdapter;
 import com.isaiko.hosnyorder.Model.Item;
+import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
     ArrayAdapter<String> categoriesAdapter;
     MenuRecyclerViewAdapter menuItemRecyclerViewAdapter;
     DatabaseReference menuDatabaseRef;
-    List<Item> menuItemsList;
+    List<Item> menuItemsList = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,22 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         String passedFilter = getIntent().getExtras().getString("category","All");
         Toast.makeText(this, passedFilter+" was passed", Toast.LENGTH_SHORT).show();
+        if(User.getInstance().getUserSelectedBranch()==null){
+            Toast.makeText(this, "Select a branch in profile settings to retrieve a menu", Toast.LENGTH_SHORT).show();
+        }else{
+            if(User.getInstance().getUserSelectedBranch().equals("Bahary")
+                    || User.getInstance().getUserSelectedBranch().equals("Mandara")
+                    ||User.getInstance().getUserSelectedBranch().equals("Downtown")){
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("Alexandria");
+            }else if(User.getInstance().getUserSelectedBranch().equals("Moqattam")
+                    || User.getInstance().getUserSelectedBranch().equals("Masr El Gedida")
+                    ||User.getInstance().getUserSelectedBranch().equals("Madinet El Nasr")){
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("Cairo");
+            }else{
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("KSA");
+            }
+            fetchMenuItems();
+        }
         menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu");
         menuItemsList = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -54,7 +71,6 @@ public class MenuActivity extends AppCompatActivity {
         menuItemsRecyclerView.addItemDecoration(dividerItemDecoration);
         menuItemRecyclerViewAdapter = new MenuRecyclerViewAdapter(this, menuItemsList);
         menuItemsRecyclerView.setAdapter(menuItemRecyclerViewAdapter);
-        fetchMenuItems();
         categoriesAdapter = new ArrayAdapter<String>(this, R.layout.custom_spinner_item, getResources().getStringArray(R.array.filter_categories)){
             @Override
             public boolean isEnabled(int position) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable{
-    private String mOrderKey, mOrderOrderedDate,mOrderStatus,mOrderType,mOrderComments,mOrderAddressComments, orderUserId;
+    private String mOrderKey, mOrderOrderedDate,mOrderTime,mOrderStatus,mOrderType,mOrderComments,mOrderAddressComments, orderUserId;
     private float mOrderTotalToPay;
     private String mOrderAddress;
     private List<OrderItem> mOrderItems;
@@ -96,5 +96,13 @@ public class Order implements Serializable{
 
     public void setmOrderAddressComments(String mOrderAddressComments) {
         this.mOrderAddressComments = mOrderAddressComments;
+    }
+
+    public String getmOrderTime() {
+        return mOrderTime;
+    }
+
+    public void setmOrderTime(String mOrderTime) {
+        this.mOrderTime = mOrderTime;
     }
 }

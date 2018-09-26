@@ -25,6 +25,10 @@ import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.States;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CheckoutDialog extends DialogFragment {
     Order passedOrder;
     EditText orderCommentTextView, addressCommentTextView, alternativeAddress;
@@ -59,6 +63,10 @@ public class CheckoutDialog extends DialogFragment {
                                 passedOrder.setmOrderStatus(States.ORDER_OPENED);
                                 String key = ordersReference.push().getKey();
                                 passedOrder.setmOrderKey(key);
+                                Date c = Calendar.getInstance().getTime();
+                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                String formattedDate = df.format(c);
+                                passedOrder.setmOrderOrderedDate(formattedDate);
                                 ordersReference.child(key).setValue(passedOrder);
                                 userOrdersReference.child(FirebaseAuth.getInstance().getUid()).child(key).setValue(passedOrder)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

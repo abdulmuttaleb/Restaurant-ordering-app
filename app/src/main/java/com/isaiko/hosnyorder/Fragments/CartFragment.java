@@ -90,7 +90,6 @@ public class CartFragment extends Fragment {
                     cartAdapter.itemsList.clear();
                     cartAdapter.notifyDataSetChanged();
                     Cart.getInstance().clearCurrentCart();
-                    Toast.makeText(getActivity(), "Got here", Toast.LENGTH_SHORT).show();
                     cartTotalTextView.setText(String.valueOf(Cart.getInstance().getCartValue()));
                     headerCartNotification.setVisibility(View.GONE);
                 }
@@ -154,7 +153,7 @@ public class CartFragment extends Fragment {
                     Order newOrder = new Order();
                     newOrder.setmOrderItems(Cart.getInstance().getCartItemsList());
                     newOrder.setmOrderType(orderTypeSpinner.getSelectedItem().toString());
-                    newOrder.setmOrderOrderedDate(selectedTime);
+                    newOrder.setmOrderTime(selectedTime);
                     newOrder.setmOrderTotalToPay(Cart.getInstance().getCartValue());
                     newOrder.setOrderUserId(FirebaseAuth.getInstance().getUid());
                     CheckoutDialog dialog = new CheckoutDialog();
