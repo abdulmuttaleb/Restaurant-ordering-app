@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.isaiko.hosnyorder.Adapter.MenuRecyclerViewAdapter;
 import com.isaiko.hosnyorder.Model.Item;
@@ -37,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
     Spinner categoriesSpinner;
     ArrayAdapter<String> categoriesAdapter;
     MenuRecyclerViewAdapter menuItemRecyclerViewAdapter;
-    DatabaseReference menuDatabaseRef;
+    Query menuDatabaseRef;
     List<Item> menuItemsList = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,13 +53,13 @@ public class MenuActivity extends AppCompatActivity {
             if(User.getInstance().getUserSelectedBranch().equals("Bahary")
                     || User.getInstance().getUserSelectedBranch().equals("Mandara")
                     ||User.getInstance().getUserSelectedBranch().equals("Downtown")){
-                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("Alexandria");
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").orderByChild("itemMenu").equalTo("Alexandria");
             }else if(User.getInstance().getUserSelectedBranch().equals("Moqattam")
                     || User.getInstance().getUserSelectedBranch().equals("Masr El Gedida")
                     ||User.getInstance().getUserSelectedBranch().equals("Madinet El Nasr")){
-                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("Cairo");
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").orderByChild("itemMenu").equalTo("Cairo");
             }else{
-                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").child("KSA");
+                menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").orderByChild("itemMenu").equalTo("KSA");
             }
             fetchMenuItems();
         }

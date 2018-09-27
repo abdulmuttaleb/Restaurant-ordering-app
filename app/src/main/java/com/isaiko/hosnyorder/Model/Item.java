@@ -3,7 +3,7 @@ package com.isaiko.hosnyorder.Model;
 import java.io.Serializable;
 
 public class Item implements Serializable {
-    private String mItemName, mItemCategory;
+    private String mItemName, mItemCategory, itemMenu;
     private float mItemPrice;
     private String mItemKey;
     private String mItemImageUri;
@@ -56,5 +56,13 @@ public class Item implements Serializable {
 
     public void setmItemImageUri(String mItemImageUri) {
         this.mItemImageUri = mItemImageUri;
+    }
+
+    public String getItemMenu() {
+        return itemMenu;
+    }
+
+    public void setItemMenu(String itemMenu) {
+        this.itemMenu = itemMenu;
     }
 }

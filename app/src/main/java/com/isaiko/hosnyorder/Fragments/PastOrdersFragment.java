@@ -17,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.isaiko.hosnyorder.Adapter.PastOrderRecyclerViewAdapter;
 import com.isaiko.hosnyorder.Model.Order;
@@ -34,14 +35,14 @@ public class PastOrdersFragment extends Fragment {
     @BindView(R.id.rv_past_orders)
     RecyclerView pastOrderRecyclerView;
     PastOrderRecyclerViewAdapter pastOrdersAdapter;
-    DatabaseReference userOrdersRef;
+    Query userOrdersRef;
     List<Order> ordersList= new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_past_orders,container,false);
         ButterKnife.bind(this,view);
-        userOrdersRef = FirebaseDatabase.getInstance().getReference().child("UserOrders").child(FirebaseAuth.getInstance().getUid());
+        userOrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").orderByChild("orderUserId").equalTo(FirebaseAuth.getInstance().getUid());
         fetchUserOrders();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         pastOrderRecyclerView.setLayoutManager(layoutManager);
