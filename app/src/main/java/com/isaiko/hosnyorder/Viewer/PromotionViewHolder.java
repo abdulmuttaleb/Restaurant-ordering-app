@@ -15,6 +15,5 @@ public class PromotionViewHolder extends RecyclerView.ViewHolder {
         nameTextView = itemView.findViewById(R.id.tv_promotion_name);
         fromTextView = itemView.findViewById(R.id.tv_promotion_from);
         toTextView = itemView.findViewById(R.id.tv_promotion_to);
-        promotionImage = itemView.findViewById(R.id.iv_promotion_image);
     }
 }

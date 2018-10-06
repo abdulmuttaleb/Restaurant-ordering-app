@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import com.isaiko.hosnyorder.Activity.MenuActivity;
 import com.isaiko.hosnyorder.Fragments.dialog.AddToCartDialog;

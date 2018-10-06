@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable{
-    private String mOrderKey, mOrderOrderedDate,mOrderTime,mOrderStatus,mOrderType,mOrderComments,mOrderAddressComments, orderUserId;
+    private String mOrderKey, mOrderOrderedDate,mOrderTime,mOrderStatus,mOrderType,mOrderComments,mOrderAddressComments, orderUserId, itemBranch, itemUserName;
     private float mOrderTotalToPay;
     private String mOrderAddress;
     private List<OrderItem> mOrderItems;
@@ -104,5 +104,21 @@ public class Order implements Serializable{
 
     public void setmOrderTime(String mOrderTime) {
         this.mOrderTime = mOrderTime;
+    }
+
+    public String getItemBranch() {
+        return itemBranch;
+    }
+
+    public void setItemBranch(String itemBranch) {
+        this.itemBranch = itemBranch;
+    }
+
+    public String getItemUserName() {
+        return itemUserName;
+    }
+
+    public void setItemUserName(String itemUserName) {
+        this.itemUserName = itemUserName;
     }
 }

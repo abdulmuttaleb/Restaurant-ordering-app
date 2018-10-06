@@ -1,6 +1,8 @@
 package com.isaiko.hosnyorder.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,10 +10,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -70,6 +77,8 @@ public class LandingActivity extends AppCompatActivity {
     TextView signupTextView;
     @BindView(R.id.btn_login)
     Button userLoginButton;
+    @BindView(R.id.tv_reset_password)
+    TextView resetPasswordTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,6 +124,49 @@ public class LandingActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
+
+
+
+        resetPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder resetPasswordDialog = new AlertDialog.Builder(LandingActivity.this);
+                resetPasswordDialog.setTitle(R.string.label_reset_password)
+                        .setMessage("Enter your mail to receive a link to reset your password!");
+                final EditText input = new EditText(LandingActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                resetPasswordDialog.setView(input)
+                        .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(!input.getText().toString().isEmpty()){
+                                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                                    String emailAddress = input.getText().toString();
+                                    auth.sendPasswordResetEmail(emailAddress).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(LandingActivity.this, "Reset password mail was sent to your Email address!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(LandingActivity.this, "Failed to send reset link to your mail!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }else{
+                                    Toast.makeText(LandingActivity.this, "Enter a valid email address!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                resetPasswordDialog.create().show();
+            }
+        });
+
     }
 
     @OnClick(R.id.btn_login)

@@ -156,6 +156,7 @@ public class CartFragment extends Fragment {
                     newOrder.setmOrderTime(selectedTime);
                     newOrder.setmOrderTotalToPay(Cart.getInstance().getCartValue());
                     newOrder.setOrderUserId(FirebaseAuth.getInstance().getUid());
+                    newOrder.setItemBranch(User.getInstance().getUserSelectedBranch());
                     CheckoutDialog dialog = new CheckoutDialog();
                     Bundle args = new Bundle();
                     args.putSerializable("passedOrder",newOrder);

@@ -45,8 +45,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
-        String passedFilter = getIntent().getExtras().getString("category","All");
-        Toast.makeText(this, passedFilter+" was passed", Toast.LENGTH_SHORT).show();
         if(User.getInstance().getUserSelectedBranch()==null){
             Toast.makeText(this, "Select a branch in profile settings to retrieve a menu", Toast.LENGTH_SHORT).show();
         }else{
@@ -116,15 +114,13 @@ public class MenuActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        if(!passedFilter.isEmpty() && passedFilter!=null){
-            int position = categoriesAdapter.getPosition(passedFilter);
-            categoriesSpinner.setSelection(position);
-            menuItemRecyclerViewAdapter.getFilter().filter(passedFilter);
-        }
+
+
+
     }
 
     private void fetchMenuItems(){
-        menuDatabaseRef.addValueEventListener(new ValueEventListener() {
+        menuDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Item> fetchedMenu = new ArrayList<>();
@@ -135,6 +131,10 @@ public class MenuActivity extends AppCompatActivity {
                 menuItemsList.clear();
                 menuItemsList.addAll(fetchedMenu);
                 menuItemRecyclerViewAdapter.notifyDataSetChanged();
+                String passedFilter = getIntent().getExtras().getString("category","All");
+                int position = categoriesAdapter.getPosition(passedFilter);
+                categoriesSpinner.setSelection(position);
+                menuItemRecyclerViewAdapter.getFilter().filter(passedFilter);
             }
 
             @Override
