@@ -1,6 +1,7 @@
  package com.isaiko.hosnyorder.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.isaiko.hosnyorder.Activity.MenuActivity;
+import com.isaiko.hosnyorder.Activity.PastOrderContentActivity;
 import com.isaiko.hosnyorder.Fragments.dialog.AddToCartDialog;
 import com.isaiko.hosnyorder.Model.Item;
 import com.isaiko.hosnyorder.Model.Order;
@@ -19,6 +21,7 @@ import com.isaiko.hosnyorder.Viewer.MenuItemViewHolder;
 import com.isaiko.hosnyorder.Viewer.PastOrderViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,15 @@ public class PastOrderRecyclerViewAdapter extends RecyclerView.Adapter<PastOrder
         final Order item = itemsList.get(position);
         holder.orderValueTextView.setText(String.valueOf(item.getmOrderTotalToPay())+" LE");
         holder.orderDateTextView.setText(item.getmOrderOrderedDate());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent orderIntent = new Intent(context, PastOrderContentActivity.class);
+                orderIntent.putExtra("orders",(Serializable)item.getmOrderItems());
+                orderIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(orderIntent);
+            }
+        });
     }
 
     @Override

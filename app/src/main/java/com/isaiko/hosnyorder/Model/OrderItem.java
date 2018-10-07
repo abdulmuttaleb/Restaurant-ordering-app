@@ -1,6 +1,8 @@
 package com.isaiko.hosnyorder.Model;
 
-public class OrderItem {
+import java.io.Serializable;
+
+public class OrderItem implements Serializable{
 
     private int mOrderItemQuantity;
     private String mOrderItemUnitWeight;

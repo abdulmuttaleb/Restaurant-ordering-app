@@ -22,7 +22,7 @@
     <string name="label_profile_settings">My Profile Settings</string>
     <string name="label_language">Language</string>
     <string name="label_support">Support</string>
-    <string name="label_report_problem">Report a problem</string>
+    <string name="label_leave_review">Leave a review</string>
     <string name="label_privacy_policy">Privacy Policy</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">Store</string>
@@ -95,10 +95,15 @@
         <item>Select a category..</item>
         <item>All</item>
         <item>Grills</item>
-        <item>Ma7ashy</item>
+        <item>Mahashy</item>
         <item>Poultry</item>
         <item>Soups</item>
         <item>Chef\'s Dishes</item>
         <item>Pastries</item>
+    </string-array>
+
+    <string-array name="payment_method">
+        <item>Cash</item>
+        <item>Visa</item>
     </string-array>
 </resources>

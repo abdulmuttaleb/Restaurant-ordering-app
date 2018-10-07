@@ -16,10 +16,12 @@ import com.isaiko.hosnyorder.Model.UI.CategoryUI;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.CircleTransform;
+import com.isaiko.hosnyorder.Utils.LocaleHelper;
 import com.isaiko.hosnyorder.Viewer.CategoryItemViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryItemViewHolder>{
     private Context context;
@@ -44,7 +46,38 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
             @Override
             public void onClick(View v) {
                 Intent menuIntent = new Intent(context, MenuActivity.class);
-                menuIntent.putExtra("category",category.getName());
+                if(Locale.getDefault().getLanguage().equals("ar")){
+                    String categoryName = category.getName();
+                    switch(categoryName){
+
+                        case "محاشى":
+                            menuIntent.putExtra("category","Mahashy");
+                            break;
+
+                        case "مشويات":
+                            menuIntent.putExtra("category","Grills");
+                            break;
+
+                        case "شوربة":
+                            menuIntent.putExtra("category","Soups");
+                            break;
+
+                        case "طيور":
+                            menuIntent.putExtra("category","Poultry");
+                            break;
+
+                        case "معجنات":
+                            menuIntent.putExtra("category","Pastries");
+                            break;
+
+                        case "أطباق الشيف":
+                            menuIntent.putExtra("category","Chef's Dishes");
+                            break;
+                    }
+                }else{
+                    menuIntent.putExtra("category",category.getName());
+
+                }
                 menuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(menuIntent);
             }

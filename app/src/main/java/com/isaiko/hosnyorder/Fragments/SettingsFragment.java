@@ -1,23 +1,27 @@
 package com.isaiko.hosnyorder.Fragments;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.isaiko.hosnyorder.Activity.LandingActivity;
 import com.isaiko.hosnyorder.Activity.MainActivity;
 import com.isaiko.hosnyorder.Activity.ProfileSettingsActivity;
 import com.isaiko.hosnyorder.R;
@@ -33,8 +37,8 @@ public class SettingsFragment extends Fragment {
     TextView profileSettingsTextView;
     @BindView(R.id.tv_choose_language)
     TextView chooseLanguageTextView;
-    @BindView(R.id.tv_report_problem)
-    TextView reportProblemTextView;
+    @BindView(R.id.tv_leave_review)
+    TextView leaveReviewTextView;
     @BindView(R.id.tv_privacy_policy)
     TextView privacyPolicyTextView;
 
@@ -85,9 +89,45 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        reportProblemTextView.setOnClickListener(new View.OnClickListener() {
+        leaveReviewTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder resetPasswordDialog = new AlertDialog.Builder(getActivity());
+                resetPasswordDialog.setTitle(R.string.label_leave_review)
+                        .setMessage("Type your review and press send!");
+                final EditText input = new EditText(getActivity());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                resetPasswordDialog.setView(input)
+                        .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(input.getText().toString().isEmpty()){
+                                    Toast.makeText(getActivity(), "Don't leave review empty!", Toast.LENGTH_SHORT).show();
+                                }else if(input.getText().toString().length()<50){
+                                    Toast.makeText(getActivity(), "Review should at least be 50 characters!", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    String review = input.getText().toString();
+                                    FirebaseDatabase.getInstance().getReference().child("reviews").child(FirebaseAuth.getInstance().getUid()).setValue(review)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(getActivity(), "Review was posted successfully!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getActivity(), "There was a problem sending review!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                resetPasswordDialog.create().show();
+                
             }
         });
 

@@ -37,10 +37,22 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:hint="(optional) Alternative address"
+        android:hint="Alternative address"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/et_address_comments"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_address_comments"
         app:layout_constraintTop_toBottomOf="@+id/et_address_comments" />
+    <Spinner
+        android:id="@+id/spinner_payment_method"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/payment_method"
+        app:layout_constraintEnd_toEndOf="@+id/et_alt_address"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_alt_address"
+        app:layout_constraintTop_toBottomOf="@+id/et_alt_address"
+        />
 </android.support.constraint.ConstraintLayout>

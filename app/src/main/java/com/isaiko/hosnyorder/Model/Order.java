@@ -9,6 +9,7 @@ public class Order implements Serializable{
     private float mOrderTotalToPay;
     private String mOrderAddress;
     private List<OrderItem> mOrderItems;
+    private String paymentMethod;
 
     public Order() {
         mOrderItems = new ArrayList<>();
@@ -120,5 +121,13 @@ public class Order implements Serializable{
 
     public void setItemUserName(String itemUserName) {
         this.itemUserName = itemUserName;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

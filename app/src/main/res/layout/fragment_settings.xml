@@ -131,12 +131,12 @@
             android:tint="@color/colorPrimary" />
 
         <TextView
-            android:id="@+id/tv_report_problem"
+            android:id="@+id/tv_leave_review"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center_vertical"
-            android:text="@string/label_report_problem"
+            android:text="@string/label_leave_review"
             android:textSize="16sp" />
     </LinearLayout>
     <View

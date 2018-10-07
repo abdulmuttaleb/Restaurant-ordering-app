@@ -32,6 +32,7 @@ import java.util.Date;
 public class CheckoutDialog extends DialogFragment {
     Order passedOrder;
     EditText orderCommentTextView, addressCommentTextView, alternativeAddress;
+    Spinner paymentMethodSpinner;
     String orderComments, addressComments, altAddress;
     DatabaseReference ordersReference,userOrdersReference;
     FirebaseAuth mAuth;
@@ -44,6 +45,8 @@ public class CheckoutDialog extends DialogFragment {
         orderCommentTextView = view.findViewById(R.id.et_order_comments);
         addressCommentTextView = view.findViewById(R.id.et_address_comments);
         alternativeAddress = view.findViewById(R.id.et_alt_address);
+        paymentMethodSpinner = view.findViewById(R.id.spinner_payment_method);
+
         mAuth = FirebaseAuth.getInstance();
         ordersReference = FirebaseDatabase.getInstance().getReference().child("Orders");
         userOrdersReference = FirebaseDatabase.getInstance().getReference().child("UserOrders");
@@ -61,6 +64,8 @@ public class CheckoutDialog extends DialogFragment {
                                 passedOrder.setmOrderAddressComments(addressComments);
                                 passedOrder.setmOrderAddress(altAddress);
                                 passedOrder.setmOrderStatus(States.ORDER_OPENED);
+                                passedOrder.setItemUserName(User.getInstance().getmUserName());
+                                passedOrder.setPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
                                 String key = ordersReference.push().getKey();
                                 passedOrder.setmOrderKey(key);
                                 Date c = Calendar.getInstance().getTime();

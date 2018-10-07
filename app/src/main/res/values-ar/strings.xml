@@ -21,7 +21,7 @@
     <string name="label_profile_settings">إعدادات حسابي الشخصي</string>
     <string name="label_language">اللغة</string>
     <string name="label_support">الدعم</string>
-    <string name="label_report_problem">التبليغ عن مشكلة</string>
+    <string name="label_leave_review">أٌترك تعليق</string>
     <string name="label_privacy_policy">سياسة الخصوصية</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">المطعم</string>
