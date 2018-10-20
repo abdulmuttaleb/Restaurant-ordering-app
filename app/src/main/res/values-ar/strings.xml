@@ -18,11 +18,16 @@
     <string name="label_total">المجموع</string>
     <string name="label_check_out">إنهاء الطلب</string>
     <string name="label_main_settings">الإعدادات الأساسية</string>
-    <string name="label_profile_settings">إعدادات حسابي الشخصي</string>
+    <string name="label_profile_information">البيانات الشخصية</string>
     <string name="label_language">اللغة</string>
     <string name="label_support">الدعم</string>
     <string name="label_leave_review">أٌترك تعليق</string>
     <string name="label_privacy_policy">سياسة الخصوصية</string>
+    <string name="label_number_of_orders">عدد الطلبات</string>
+    <string name="label_branch">الفرع</string>
+    <string name="label_order_comments">تعليقات علي الطلب</string>
+    <string name="label_address_comments">تعليقات عن العنوان</string>
+    <string name="label_alternative_address">إذا الطلب على عنوان مختلف رجاء كتابته هنا</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">المطعم</string>
     <string name="label_others">أخرى</string>
@@ -48,7 +53,7 @@
     <!-- Profile Settings-->
     <string name="label_phone">رقم التليفون</string>
     <string name="label_city">المدينة</string>
-    <string name="label_area">المنطقة</string>
+    <string name="label_area">المنطقة و الشارع</string>
     <string name="label_building">رقم المبنى</string>
     <string name="label_floor">الطابق</string>
     <string name="label_apart_num">رقم السكن</string>

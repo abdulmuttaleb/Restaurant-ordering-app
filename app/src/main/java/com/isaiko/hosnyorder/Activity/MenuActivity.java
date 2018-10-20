@@ -56,7 +56,7 @@ public class MenuActivity extends AppCompatActivity {
                     || User.getInstance().getUserSelectedBranch().equals("Masr El Gedida")
                     ||User.getInstance().getUserSelectedBranch().equals("Madinet El Nasr")){
                 menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").orderByChild("itemMenu").equalTo("Cairo");
-            }else{
+            }else if(User.getInstance().getUserSelectedBranch().equals("KSA")){
                 menuDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Menu").orderByChild("itemMenu").equalTo("KSA");
             }
             fetchMenuItems();
@@ -132,6 +132,7 @@ public class MenuActivity extends AppCompatActivity {
                 menuItemsList.addAll(fetchedMenu);
                 menuItemRecyclerViewAdapter.notifyDataSetChanged();
                 String passedFilter = getIntent().getExtras().getString("category","All");
+                Toast.makeText(MenuActivity.this, passedFilter, Toast.LENGTH_SHORT).show();
                 int position = categoriesAdapter.getPosition(passedFilter);
                 categoriesSpinner.setSelection(position);
                 menuItemRecyclerViewAdapter.getFilter().filter(passedFilter);

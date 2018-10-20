@@ -6,6 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/food_bg"
+        android:scaleType="centerCrop"
+        android:alpha="0.5"/>
+
     <EditText
         android:id="@+id/et_order_comments"
         android:layout_width="225dp"
@@ -13,7 +20,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:hint="Order comments"
+        android:hint="@string/label_order_comments"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +32,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Address comments"
+        android:hint="@string/label_address_comments"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/et_order_comments"
         app:layout_constraintHorizontal_bias="0.0"
@@ -37,7 +44,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Alternative address"
+        android:hint="@string/label_alternative_address"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/et_address_comments"
         app:layout_constraintHorizontal_bias="0.0"

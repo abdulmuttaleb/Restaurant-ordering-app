@@ -50,7 +50,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
                     String categoryName = category.getName();
                     switch(categoryName){
 
-                        case "محاشى":
+                        case "محاشي":
                             menuIntent.putExtra("category","Mahashy");
                             break;
 

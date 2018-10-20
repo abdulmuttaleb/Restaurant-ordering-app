@@ -9,7 +9,6 @@ import com.isaiko.hosnyorder.R;
 
 public class PromotionViewHolder extends RecyclerView.ViewHolder {
     public TextView nameTextView, fromTextView, toTextView;
-    public ImageView promotionImage;
     public PromotionViewHolder(View itemView) {
         super(itemView);
         nameTextView = itemView.findViewById(R.id.tv_promotion_name);

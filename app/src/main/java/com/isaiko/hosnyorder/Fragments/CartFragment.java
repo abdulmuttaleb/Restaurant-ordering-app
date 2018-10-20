@@ -13,6 +13,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,10 @@ import com.isaiko.hosnyorder.Model.OrderItem;
 import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -137,10 +141,14 @@ public class CartFragment extends Fragment {
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        selectedTime = selectedHour + ":" + selectedMinute;
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.HOUR_OF_DAY,selectedHour);
+                        calendar.set(Calendar.MINUTE,selectedMinute);
+                        String date = new SimpleDateFormat("hh:mm a").format(calendar.getTime());
+                        selectedTime = date;
                         orderTimeTextView.setText(selectedTime);
                     }
-                }, hour, minute, true);//Yes 24 hour time
+                }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }

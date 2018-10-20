@@ -1,5 +1,6 @@
 package com.isaiko.hosnyorder.Fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,9 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.isaiko.hosnyorder.Activity.ProfileSettingsActivity;
 import com.isaiko.hosnyorder.Adapter.CategoryRecyclerViewAdapter;
 import com.isaiko.hosnyorder.Model.UI.CategoryUI;
+import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 
 import java.util.ArrayList;
@@ -29,6 +34,8 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.rv_category)
     RecyclerView categoryRecyclerView;
+    @BindView(R.id.tv_current_branch)
+    TextView currentBranchTextView;
     CategoryRecyclerViewAdapter categoryAdapter;
     List<CategoryUI> categoryList;
 
@@ -37,6 +44,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home,container,false);
         ButterKnife.bind(this,view);
+
+        if(User.getInstance().getUserSelectedBranch()==null){
+            String string = "Current Branch: Please select a branch from user settings";
+            currentBranchTextView.setText(string);
+        }else if(User.getInstance().getUserSelectedBranch().isEmpty()) {
+            String string = "Current Branch: Please select a branch from user settings";
+            currentBranchTextView.setText(string);
+        }else{
+            String string = "Current Branch: "+User.getInstance().getUserSelectedBranch();
+            currentBranchTextView.setText(string);
+        }
+
+        if(User.getInstance().getmUserAddress() == null){
+            Toast.makeText(getActivity(), "Address isn't set!", Toast.LENGTH_SHORT).show();
+            Intent profileSettings = new Intent(getActivity().getApplicationContext(), ProfileSettingsActivity.class);
+            startActivity(profileSettings);
+        }
         populateCategoryView();
         return view;
     }

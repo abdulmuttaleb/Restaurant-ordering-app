@@ -69,34 +69,41 @@
         android:id="@+id/iv_increase"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_add"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/iv_item_image" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_item_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2"
+        app:layout_constraintVertical_bias="0.648" />
 
     <ImageView
         android:id="@+id/iv_decrease"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_item_quantity"
-        app:layout_constraintStart_toStartOf="@+id/tv_item_quantity"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_quantity"
-        android:background="@drawable/ic_remove" />
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_remove"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_quantity"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_quantity"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_quantity"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tv_item_quantity"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/iv_increase"
-        app:layout_constraintStart_toStartOf="@+id/iv_increase"
-        app:layout_constraintTop_toBottomOf="@+id/iv_increase"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_increase"
+        app:layout_constraintStart_toEndOf="@+id/iv_increase"
+        app:layout_constraintTop_toTopOf="@+id/iv_increase"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="10" />
 
     <ImageView

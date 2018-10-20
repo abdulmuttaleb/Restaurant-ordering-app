@@ -23,6 +23,7 @@ import com.isaiko.hosnyorder.Model.Promotion;
 import com.isaiko.hosnyorder.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,7 +55,7 @@ public class PromotionsFragment extends Fragment {
     }
 
     private void fetchPromotions(){
-        promotionsRef.addValueEventListener(new ValueEventListener() {
+        promotionsRef.orderByChild("promotionMilli").startAt(Calendar.getInstance().getTimeInMillis()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Promotion> tempList = new ArrayList<>();

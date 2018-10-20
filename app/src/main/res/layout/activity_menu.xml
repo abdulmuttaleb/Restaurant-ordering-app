@@ -8,7 +8,8 @@
     <Spinner
         android:id="@+id/spinner_filter_category"
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"
+        android:background="@drawable/alpha_drawable"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_menu_items"

@@ -32,10 +32,6 @@ import java.util.List;
          holder.nameTextView.setText(promotion.getPromotionName());
          holder.fromTextView.setText(promotion.getPromotionFrom());
          holder.toTextView.setText(promotion.getPromotionTo());
-         Picasso.with(context).load(promotion.getPromotionImageUri())
-                 .centerCrop()
-                 .fit()
-                 .into(holder.promotionImage);
      }
 
      @Override

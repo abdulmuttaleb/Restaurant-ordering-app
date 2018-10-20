@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +40,7 @@ public class AddToCartDialog extends DialogFragment {
         //itemFinalPriceTextView = view.findViewById(R.id.tv_final_price);
         itemOrderQuantityEditText = view.findViewById(R.id.et_number_of_orders);
         itemWeightSpinner = view.findViewById(R.id.spinner_weight);
+        itemWeightSpinner.setSelection(3);
         mAuth = FirebaseAuth.getInstance();
         userCartReference = FirebaseDatabase.getInstance().getReference().child("Cart").child(mAuth.getUid());
         itemNameTextView.setText(passedItem.getmItemName());
@@ -56,6 +58,7 @@ public class AddToCartDialog extends DialogFragment {
                                             itemWeightSpinner.getSelectedItem().toString());
                                     Cart.getInstance().insertItem(newOrderItem);
                                     userCartReference.setValue(Cart.getInstance());
+                                    Toast.makeText(getActivity(), passedItem.getmItemName()+" was added successfully to your cart!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

@@ -28,7 +28,7 @@ public class PastOrderContentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         passedOrdersList = (List<OrderItem>)getIntent().getSerializableExtra("orders");
         for (OrderItem order: passedOrdersList) {
-            String orderText = order.getmOrderItem().getmItemName()+"\n"+order.getmOrderItemUnitWeight()+"\t"+order.getmOrderItemQuantity()
+            String orderText = order.getmOrderItem().getmItemName()+"\n"+order.getmOrderItemUnitWeight()+"\nQuantity: "+order.getmOrderItemQuantity()
                     +"\n"+order.getmOrderPrice()+"\n\n\n";
             orderContentTextView.append(orderText);
         }

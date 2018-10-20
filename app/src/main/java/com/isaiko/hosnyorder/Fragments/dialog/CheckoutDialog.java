@@ -2,6 +2,7 @@ package com.isaiko.hosnyorder.Fragments.dialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,7 @@ public class CheckoutDialog extends DialogFragment {
     String orderComments, addressComments, altAddress;
     DatabaseReference ordersReference,userOrdersReference;
     FirebaseAuth mAuth;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -59,6 +62,7 @@ public class CheckoutDialog extends DialogFragment {
                             @Override
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                DialogInterface d1 = dialog;
                                 validateForm();
                                 passedOrder.setmOrderComments(orderComments);
                                 passedOrder.setmOrderAddressComments(addressComments);
@@ -66,6 +70,7 @@ public class CheckoutDialog extends DialogFragment {
                                 passedOrder.setmOrderStatus(States.ORDER_OPENED);
                                 passedOrder.setItemUserName(User.getInstance().getmUserName());
                                 passedOrder.setPaymentMethod(paymentMethodSpinner.getSelectedItem().toString());
+                                passedOrder.setItemUserPhone(User.getInstance().getmPhoneNumber());
                                 String key = ordersReference.push().getKey();
                                 passedOrder.setmOrderKey(key);
                                 Date c = Calendar.getInstance().getTime();
@@ -102,4 +107,6 @@ public class CheckoutDialog extends DialogFragment {
             altAddress = alternativeAddress.getText().toString();
         }
     }
+
+
 }

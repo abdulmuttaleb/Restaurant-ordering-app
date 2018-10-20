@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.isaiko.hosnyorder.Activity.LandingActivity;
 import com.isaiko.hosnyorder.Activity.MainActivity;
 import com.isaiko.hosnyorder.Activity.ProfileSettingsActivity;
+import com.isaiko.hosnyorder.Model.User;
 import com.isaiko.hosnyorder.R;
 import com.isaiko.hosnyorder.Utils.LocaleHelper;
 
@@ -98,9 +99,9 @@ public class SettingsFragment extends Fragment {
                 final EditText input = new EditText(getActivity());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
                 input.setLayoutParams(lp);
-                input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                input.setInputType(InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE);
                 resetPasswordDialog.setView(input)
                         .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                             @Override
@@ -111,7 +112,7 @@ public class SettingsFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Review should at least be 50 characters!", Toast.LENGTH_SHORT).show();
                                 }else{
                                     String review = input.getText().toString();
-                                    FirebaseDatabase.getInstance().getReference().child("reviews").child(FirebaseAuth.getInstance().getUid()).setValue(review)
+                                    FirebaseDatabase.getInstance().getReference().child("reviews").child(FirebaseAuth.getInstance().getUid()).setValue(review +"\n\n" + User.getInstance().getmUserName())
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

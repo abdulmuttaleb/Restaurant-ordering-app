@@ -132,6 +132,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                                 int position = lw.getCheckedItemPosition();
                                 String selectedBranch = lw.getItemAtPosition(position).toString();
                                 userDatabaseRef.child("userSelectedBranch").setValue(selectedBranch);
+                                Toast.makeText(ProfileSettingsActivity.this, "Branch was changed succcessfully!", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton(getResources().getString(R.string.label_cancel), new DialogInterface.OnClickListener() {
                     @Override

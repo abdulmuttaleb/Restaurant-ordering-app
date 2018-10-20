@@ -19,11 +19,16 @@
     <string name="label_total">Total</string>
     <string name="label_check_out">Check Out</string>
     <string name="label_main_settings">Main Settings</string>
-    <string name="label_profile_settings">My Profile Settings</string>
+    <string name="label_profile_information">My information</string>
     <string name="label_language">Language</string>
     <string name="label_support">Support</string>
     <string name="label_leave_review">Leave a review</string>
     <string name="label_privacy_policy">Privacy Policy</string>
+    <string name="label_number_of_orders">Number of orders</string>
+    <string name="label_branch">Branch</string>
+    <string name="label_order_comments">Order comment</string>
+    <string name="label_address_comments">Address comment</string>
+    <string name="label_alternative_address">If you are ordering from a different address please write it down here</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">Store</string>
     <string name="label_others">Others</string>
@@ -43,7 +48,7 @@
     <!-- Profile Settings-->
     <string name="label_phone">Phone Number</string>
     <string name="label_city">City</string>
-    <string name="label_area">Area</string>
+    <string name="label_area">Area and Street</string>
     <string name="label_building">Building</string>
     <string name="label_floor">Floor</string>
     <string name="label_apart_num">Apartment Number</string>
@@ -70,6 +75,7 @@
         <item>Moqattam</item>
         <item>Masr El Gedida</item>
         <item>Madinet El Nasr</item>
+        <item>KSA</item>
     </string-array>
     <!--Weights-->
     <string-array name="order_weights">

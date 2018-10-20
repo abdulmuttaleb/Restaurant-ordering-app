@@ -1,8 +1,8 @@
 package com.isaiko.hosnyorder.Model;
 
 public class Promotion {
-    String promotionName, promotionFrom, promotionTo,promotionImageUri;
-    long promotionMilli;
+    String promotionName, promotionFrom, promotionTo, promotionKey;
+    long promotionToMilli;
 
     public Promotion() {
     }
@@ -38,18 +38,18 @@ public class Promotion {
     }
 
     public long getPromotionMilli() {
-        return promotionMilli;
+        return promotionToMilli;
     }
 
     public void setPromotionMilli(long promotionMilli) {
-        this.promotionMilli = promotionMilli;
+        this.promotionToMilli = promotionMilli;
     }
 
-    public String getPromotionImageUri() {
-        return promotionImageUri;
+    public String getPromotionKey() {
+        return promotionKey;
     }
 
-    public void setPromotionImageUri(String promotionImageUri) {
-        this.promotionImageUri = promotionImageUri;
+    public void setPromotionKey(String promotionKey) {
+        this.promotionKey = promotionKey;
     }
 }
