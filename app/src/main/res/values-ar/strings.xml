@@ -27,7 +27,9 @@
     <string name="label_branch">الفرع</string>
     <string name="label_order_comments">تعليقات علي الطلب</string>
     <string name="label_address_comments">تعليقات عن العنوان</string>
-    <string name="label_alternative_address">إذا الطلب على عنوان مختلف رجاء كتابته هنا</string>
+    <string name="label_alternative_address">عنوان بديل</string>
+    <string name="label_alternative_address_note">إذا الطلب على عنوان مختلف رجاء كتابته هنا</string>
+    <string name="prompt_select_category">إختر الفئة</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">المطعم</string>
     <string name="label_others">أخرى</string>

@@ -1,4 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
 
     <string name="app_name">Hosny</string>
     <string name="open" translatable="false">Open</string>
@@ -28,7 +29,8 @@
     <string name="label_branch">Branch</string>
     <string name="label_order_comments">Order comment</string>
     <string name="label_address_comments">Address comment</string>
-    <string name="label_alternative_address">If you are ordering from a different address please write it down here</string>
+    <string name="label_alternative_address">Alternative Address</string>
+    <string name="label_alternative_address_note">If you are ordering from a different address please write it down here</string>
     <!--Navigation Drawer Items-->
     <string name="label_store">Store</string>
     <string name="label_others">Others</string>

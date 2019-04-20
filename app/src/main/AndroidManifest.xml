@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.isaiko.hosnyorder">
+    package="com.isaiko.restaurantordering">
 
     <application
         android:name=".HosnyApplication"
